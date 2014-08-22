@@ -1,0 +1,90 @@
+#!/usr/bin/env php
+<?php
+
+/*
+|--------------------------------------------------------------------------
+| Register The Auto Loader
+|--------------------------------------------------------------------------
+|
+| Composer provides a convenient, automatically generated class loader
+| for our application. We just need to utilize it! We'll require it
+| into the script here so that we do not have to worry about the
+| loading of any our classes "manually". Feels great to relax.
+|
+*/
+
+// Thx's to @kladd_ build novice to migrate database with elequent orm ^_^
+// https://github.com/kladd/slim-eloquent
+
+require __DIR__.'/vendor/autoload.php';
+
+define("MIGRATIONS_PATH", __DIR__."/app/database/migrations");
+define("SEEDS_PATH", __DIR__."/app/database/seeds");
+
+/**
+ * Script for creating, destroying, and seeding the app's database
+ */
+class Novice {
+
+    function __construct($args)
+    {
+        $this->args = $args;
+    }
+
+    function help()
+    {
+        echo "usage: php " . $this->args[0] . " <command> [<args>]\n";
+    }
+
+    function run()
+    {
+        if (count($this->args) <= 1) {
+            $this->help();
+        } else {
+            switch ($this->args[1]) {
+                case "migrate":
+                    $this->runMigrations();
+                    if (!isset($this->args[2]) || $this->args[2] != '--seed')
+                        break;
+                case "seed":
+                    $this->runSeed();
+                    break;
+                case "help":
+                case "--help":
+                    $this->help();
+                    break;
+            }
+        }
+    }
+
+    function runMigrations()
+    {
+        $files = glob(MIGRATIONS_PATH.'/*.php');
+
+        foreach ($files as $file) {
+            require_once($file);
+
+            $class = basename($file, '.php');
+
+            $migration = new $class;
+            $migration->run();
+        }
+    }
+
+    function runSeed()
+    {
+        $files = glob(SEEDS_PATH.'/*.php');
+
+        foreach ($files as $file) {
+            require_once($file);
+
+            $class = basename($file, '.php');
+
+            $migration = new $class;
+            $migration->run();
+        }
+    }
+}
+
+$novice = new Novice($argv);
+$novice->run();
