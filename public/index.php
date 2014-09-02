@@ -44,7 +44,7 @@ function getSchedule( $city = '', $category = '' )
         $return[]['player'] = [ $value->team1(), $value->team2() ];
         $return[]['time'] = [ date("d m y",strtotime($value->datetime_competition)), date("H.i",strtotime($value->datetime_competition)) ];
         $return[]['currentScore'] = [ $value->score_team1, $value->score_team2 ];
-        $return[]['updated_at'] = $value->updated_at;
+        $return[]['updated_at'] = $value->updated_at->toDateTimeString(); ;
       }
       $return['error'] = false;
     } catch (Exception $e) {
@@ -72,7 +72,7 @@ function getScheduleById( $id = null )
       $return['player'] = [ $schedule->team1(), $schedule->team2() ];
       $return['time'] = [ date("d m y",strtotime($schedule->datetime_competition)), date("H.i",strtotime($schedule->datetime_competition)) ];
       $return['currentScore'] = [ $schedule->score_team1, $schedule->score_team2 ];
-      $return['updated_at'] = $schedule->updated_at;
+      $return['updated_at'] = $schedule->updated_at->toDateTimeString(); ;
       $return['error'] = false;
     } catch (Exception $e) {
       $return['error'] = true;
