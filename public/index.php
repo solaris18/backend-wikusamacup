@@ -40,11 +40,11 @@ function getSchedule( $city = '', $category = '' )
       $schedule = ( ! empty( $city ) AND ! empty( $category ) ) ? Schedule::where( 'city', '=', $city)->where( 'category', '=', $category)->get() : Schedule::all();
       
       foreach ($schedule as $key => $value) {
-        $return[]['id'] = $value->id;
-        $return[]['player'] = [ $value->team1(), $value->team2() ];
-        $return[]['time'] = [ date("d m y",strtotime($value->datetime_competition)), date("H.i",strtotime($value->datetime_competition)) ];
-        $return[]['currentScore'] = [ $value->score_team1, $value->score_team2 ];
-        $return[]['updated_at'] = $value->updated_at->toDateTimeString(); ;
+        $return[$key]['id'] = $value->id;
+        $return[$key]['player'] = [ $value->team1(), $value->team2() ];
+        $return[$key]['time'] = [ date("d m y",strtotime($value->datetime_competition)), date("H.i",strtotime($value->datetime_competition)) ];
+        $return[$key]['currentScore'] = [ $value->score_team1, $value->score_team2 ];
+        $return[$key]['updated_at'] = $value->updated_at->toDateTimeString(); ;
       }
       $return['error'] = false;
     } catch (Exception $e) {
