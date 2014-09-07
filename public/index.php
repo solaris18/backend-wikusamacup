@@ -2,14 +2,19 @@
 require __DIR__.'/../vendor/autoload.php';
 
 use Mailgun\Mailgun;
-$app = new Slim\Slim();
+$app = new Slim\Slim( [
+  'templates.path' => '../app/views/'
+] );
+
 
 // routes
 $app->post('/registration', 'registration');
-$app->get('/schedule/','getSchedule');
+$app->get('/schedule','getSchedule');
 $app->get('/schedule/:id','getScheduleById');
 $app->get('/schedule/:city/:category','getSchedule');
 
+$app->get('/login','getLogin');
+$app->post('/login','postLogin');
 
 // Post registration team
 function registration()
@@ -26,8 +31,8 @@ function registration()
       # Include the Autoloader (see "Libraries" for install instructions)
 
       # Instantiate the client.
-      $mgClient = new Mailgun('key-93ff6cb32c74d74e5ae33267adb7758b');
-      $domain = "sandbox0a8d2b3620114db389abe6833a0c5c96.mailgun.org";
+      $mgClient = new Mailgun('key');
+      $domain = "domain";
 
       # Make the call to the client.
       $result = $mgClient->sendMessage("$domain",
@@ -112,6 +117,42 @@ function getScheduleById( $id = null )
     }
 
     $response->write( json_encode( $return ) );
+}
+
+function getLogin()
+{
+  global $app;
+
+  $app->render('user/login.php');
+}
+
+function postLogin()
+{
+  global $app;
+  $email = $app->request->post('email');
+  $password = $app->request->post('password');
+
+  if ( ! empty( $email ) AND ! empty( $password ) )
+  {
+    $user = User::where( 'email', '=', $email )->where( 'password', '=', sha1( $password ) )->first();
+    
+    if ($user->count() > 0) {
+      $_SESSION['user']['email'] = $email;
+      $_SESSION['user']['name'] = $user->name;
+      $_SESSION['user']['id'] = $user->id;
+      $app->flash('success', 'Selamat datang '.$user->name);
+      $app->redirect('/dashboard');
+    }
+    else
+    {
+      $app->flash('error', 'Email atau password salah!');
+    }
+  }
+  else
+  {
+    $app->flash('error', 'silahkan isi email dan password');
+  }
+  $app->redirect('/login');
 }
 
 $app->run();
