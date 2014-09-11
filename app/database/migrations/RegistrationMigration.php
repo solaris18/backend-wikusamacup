@@ -9,6 +9,7 @@ class RegistrationMigration {
         Capsule::schema()->create('registrations', function($table) {
             $table->increments('id');
             $table->string('team_name');
+            $table->string('region');
             $table->string('generation');
             $table->string('pic');
             $table->string('phone');

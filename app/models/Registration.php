@@ -8,5 +8,5 @@ class Registration extends Eloquent {
 	public static $rules = [];
 
 	// Don't forget to fill this array
-	protected $fillable = [ 'team_name', 'generation', 'pic', 'phone', 'email', 'sosmed' ];
+	protected $fillable = [ 'team_name', 'generation', 'pic', 'phone', 'email', 'sosmed', 'region' ];
 }
