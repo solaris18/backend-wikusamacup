@@ -1,10 +1,24 @@
 <?php
 require __DIR__.'/../vendor/autoload.php';
 
+use \Slim\Middleware\SessionCookie;
 use Mailgun\Mailgun;
+
 $app = new Slim\Slim( [
   'templates.path' => '../app/views/'
 ] );
+
+$app->add(new \Slim\Middleware\SessionCookie(array(
+    'expires' => '20 minutes',
+    'path' => '/',
+    'domain' => null,
+    'secure' => false,
+    'httponly' => false,
+    'name' => 'slim_session',
+    'secret' => 'CHANGE_ME',
+    'cipher' => MCRYPT_RIJNDAEL_256,
+    'cipher_mode' => MCRYPT_MODE_CBC
+)));
 
 
 // routes
@@ -15,6 +29,8 @@ $app->get('/schedule/:city/:category','getSchedule');
 
 $app->get('/login','getLogin');
 $app->post('/login','postLogin');
+$app->get('/logout','getLogout');
+$app->get('/dashboard','getDashboard');
 
 // Post registration team
 function registration()
@@ -63,7 +79,7 @@ function registration()
                 </html>
               ')
         );
-      
+
       $malang = '
                     <p>
                       <strong>Biaya</strong> : Rp 400.000 (empat ratus ribu rupiah)<br>
@@ -126,7 +142,7 @@ function registration()
                 </html>
               ')
         );
-    
+
 
       $response->write( json_encode( [ 'id' => $registration->id, 'error' => false ] ) );
     } catch (Exception $e) {
@@ -145,7 +161,7 @@ function getSchedule( $city = '', $category = '' )
     $return = [];
     try {
       $schedule = ( ! empty( $city ) AND ! empty( $category ) ) ? Schedule::where( 'city', '=', $city)->where( 'category', '=', $category)->get() : Schedule::all();
-      
+
       foreach ($schedule as $key => $value) {
         $return[$key]['id'] = $value->id;
         $return[$key]['player'] = [ $value->team1(), $value->team2() ];
@@ -192,6 +208,9 @@ function getLogin()
 {
   global $app;
 
+  if( ! empty($_SESSION['user']['email']) )
+    $app->redirect('/dashboard');
+
   $app->render('user/login.php');
 }
 
@@ -204,23 +223,47 @@ function postLogin()
   if ( ! empty( $email ) AND ! empty( $password ) )
   {
     $user = User::where( 'email', '=', $email )->where( 'password', '=', sha1( $password ) )->first();
-    
-    if ($user->count() > 0) {
+
+    if ( ! empty($user) ) {
       $_SESSION['user']['email'] = $email;
       $_SESSION['user']['name'] = $user->name;
       $_SESSION['user']['id'] = $user->id;
-      $app->flash('success', 'Selamat datang '.$user->name);
+      $app->flash('messages', 'Selamat datang '.$user->name);
       $app->redirect('/dashboard');
     }
     else
     {
-      $app->flash('error', 'Email atau password salah!');
+      $app->flash('messages', '<p class="bg-danger text-danger">Email atau password salah!</p>');
     }
   }
   else
   {
-    $app->flash('error', 'silahkan isi email dan password');
+    $app->flash('messages', '<p class="bg-danger text-danger">silahkan isi email dan password</p>');
   }
+  $app->redirect('/login');
+}
+
+function getDashboard()
+{
+  global $app;
+
+  if( empty($_SESSION['user']['email']) )
+    $app->redirect('/login');
+
+  $app->render('admin/dashboard.php');
+}
+
+function getLogout()
+{
+  global $app;
+
+  $_SESSION['user']['email'] = null;
+  $_SESSION['user']['name'] = null;
+  $_SESSION['user']['id'] = null;
+  session_destroy();
+
+  $app->flash('messages', '<p class="bg-success text-success">Anda telah keluar dari aplikasi</p>');
+
   $app->redirect('/login');
 }
 
