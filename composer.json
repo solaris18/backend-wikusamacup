@@ -3,10 +3,14 @@
 		"slim/slim": "2.*",
 		"illuminate/database": "*",
 		"illuminate/validation": "*",
-		"mailgun/mailgun-php": "1.7.1"
+		"mailgun/mailgun-php": "1.7.1",
+    "petebrowne/slim-layout-view": "0.3.*"
 	},
 	"autoload": {
-		"files": [ "app/config/app.php", "app/config/database.php" ],
+		"files": [
+			"app/config/app.php",
+			"app/config/database.php"
+		],
 		"classmap": [ "app/models" ]
 	}
 }

@@ -4,8 +4,11 @@ require __DIR__.'/../vendor/autoload.php';
 use \Slim\Middleware\SessionCookie;
 use Mailgun\Mailgun;
 
+
 $app = new Slim\Slim( [
-  'templates.path' => '../app/views/'
+  'templates.path' => '../app/views/',
+  'view' => '\Slim\LayoutView',
+  'layout' => 'layouts/admin.php'
 ] );
 
 $app->add(new \Slim\Middleware\SessionCookie(array(
@@ -19,7 +22,6 @@ $app->add(new \Slim\Middleware\SessionCookie(array(
     'cipher' => MCRYPT_RIJNDAEL_256,
     'cipher_mode' => MCRYPT_MODE_CBC
 )));
-
 
 // routes
 $app->post('/registration', 'registration');
@@ -211,7 +213,7 @@ function getLogin()
   if( ! empty($_SESSION['user']['email']) )
     $app->redirect('/dashboard');
 
-  $app->render('user/login.php');
+  $app->render('user/login.php', [ 'layout' => false ] );
 }
 
 function postLogin()
