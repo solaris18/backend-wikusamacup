@@ -252,7 +252,10 @@ function getDashboard()
   if( empty($_SESSION['user']['email']) )
     $app->redirect('/login');
 
-  $app->render('admin/dashboard.php');
+  $data['teams'] = Registration::where( 'email', '!=' ,'' )->get();
+  $data['title'] = 'Team Registration Data';
+
+  $app->render( 'admin/dashboard.php', $data );
 }
 
 function getLogout()

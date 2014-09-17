@@ -15,6 +15,7 @@ class ScheduleMigration {
             $table->integer('score_team2');
             $table->string('city');
             $table->string('category');
+            $table->boolean('live');
             $table->timestamps();
         });
     }
