@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 
     <!-- Custom styles for this template -->
-    <link href="assets/css/dashboard.css" rel="stylesheet">
+    <link href="<?php echo $baseUrl ?>/assets/css/dashboard.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -35,11 +35,11 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/dashboard">Wikusamacup 2014</a>
+          <a class="navbar-brand" href="<?php echo $baseUrl ?>/dashboard">Wikusamacup 2014</a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="/logout">Logout</a></li>
+            <li><a href="<?php echo $baseUrl ?>/logout">Logout</a></li>
           </ul>
         </div>
       </div>
@@ -49,8 +49,8 @@
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <li class="active"><a href="/admin/registration">Team Registration</a></li>
-            <li><a href="/schedule">Schedule & scoring</a></li>
+            <li class="<?php echo ( ! empty( $homeActive ) ? $homeActive : '' ) ?>"><a href="<?php echo $baseUrl ?>/dashboard">Team Registration</a></li>
+            <li class="<?php echo ( ! empty( $scheduleActive ) ? $scheduleActive : '' ) ?>"><a href="<?php echo $baseUrl ?>/admin/schedule">Schedule & Scoring</a></li>
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
@@ -67,8 +67,8 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script src="assets/js/docs.min.js"></script>
+    <script src="<?php echo $baseUrl ?>/assets/js/docs.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="<?php echo $baseUrl ?>/assets/js/ie10-viewport-bug-workaround.js"></script>
   </body>
 </html>

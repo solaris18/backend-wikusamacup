@@ -11,6 +11,10 @@ $app = new Slim\Slim( [
   'layout' => 'layouts/admin.php'
 ] );
 
+$app->hook('slim.before', function () use ($app) {
+    $app->view()->appendData(array('baseUrl' => 'http://'.$_SERVER['HTTP_HOST'] ));
+});
+
 $app->add(new \Slim\Middleware\SessionCookie(array(
     'expires' => '20 minutes',
     'path' => '/',
@@ -33,6 +37,7 @@ $app->get('/login','getLogin');
 $app->post('/login','postLogin');
 $app->get('/logout','getLogout');
 $app->get('/dashboard','getDashboard');
+$app->get('/admin/schedule', 'getAdminSchedule');
 
 // Post registration team
 function registration()
@@ -254,8 +259,23 @@ function getDashboard()
 
   $data['teams'] = Registration::where( 'email', '!=' ,'' )->get();
   $data['title'] = 'Team Registration Data';
+  $data['homeActive'] = 'active';
 
   $app->render( 'admin/dashboard.php', $data );
+}
+
+function getAdminSchedule()
+{
+  global $app;
+
+  if( empty($_SESSION['user']['email']) )
+    $app->redirect('/login');
+
+  $data['schedules'] = Schedule::all();
+  $data['title'] = 'Schedule & Scoring';
+  $data['scheduleActive'] = 'active';
+
+  $app->render( 'schedule/view.php', $data );
 }
 
 function getLogout()
