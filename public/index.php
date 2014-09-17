@@ -42,6 +42,7 @@ $app->get('/admin/schedule/add', 'getAdminScheduleCreate');
 $app->post('/admin/schedule', 'postAdminSchedule');
 $app->put('/admin/schedule/:id', 'putAdminSchedule');
 $app->get('/admin/schedule/livescore/:id', 'getAdminScheduleLive');
+$app->get('/admin/schedule/edit/:id', 'getAdminScheduleEdit');
 
 // Post registration team
 function registration()
@@ -330,7 +331,7 @@ function putAdminSchedule( $id )
     $data = $app->request->post();
     $schedule->update($data);
 
-    if( true == $live ){
+    if( 'true' == $live ){
       $messages = 'Score success updated';
       $redirect = '/admin/schedule/livescore/'.$id;
     }else{
@@ -359,6 +360,21 @@ function getAdminScheduleLive( $id = 0 )
   $data['scheduleActive'] = 'active';
 
   $app->render( 'schedule/live.php', $data );
+}
+
+function getAdminScheduleEdit( $id = 0 )
+{
+  global $app;
+
+  if( empty($_SESSION['user']['email']) )
+    $app->redirect('/login');
+
+  $data['schedule'] = Schedule::find($id);
+  $data['title'] = 'Update Schedule & Score';
+  $data['scheduleActive'] = 'active';
+  $data['teams'] = Registration::where( 'email', '!=' ,'' )->get();
+
+  $app->render( 'schedule/update.php', $data );
 }
 
 function getLogout()

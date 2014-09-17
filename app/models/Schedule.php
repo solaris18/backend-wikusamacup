@@ -8,12 +8,12 @@ class Schedule extends Eloquent {
 	public static $rules = [];
 
 	// Don't forget to fill this array
-	protected $fillable = [ 'team1_id', 'team2_id', 'datetime_competition', 'score_team1', 'score_team2', 'city', 'category' ];
+	protected $fillable = [ 'team1_id', 'team2_id', 'datetime_competition', 'score_team1', 'score_team2', 'city', 'category', 'live' ];
 
   public function team1()
   {
   	$registration = Registration::find($this->team1_id);
-  	
+
     return $registration->team_name;
   }
   public function team2()
