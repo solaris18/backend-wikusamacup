@@ -24,7 +24,7 @@
           <td><?php echo date("d m y",strtotime($schedule->datetime_competition)).', '.date("H.i",strtotime($schedule->datetime_competition)) ?></td>
           <td><?php echo $schedule->city ?></td>
           <td><?php echo $schedule->category ?></td>
-          <td><?php echo ( '1' == $schedule->live ) ? 'Live' : 'Not Live' ?></td>>
+          <td><?php echo ( '1' == $schedule->live ) ? 'Live' : 'Not Live' ?></td>
         </tr>
       <?php endforeach; ?>
     </tbody>
