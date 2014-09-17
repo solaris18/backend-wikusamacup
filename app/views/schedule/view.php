@@ -1,3 +1,4 @@
+<a href="<?php echo $baseUrl ?>/admin/schedule/add" class="btn btn-success btn-lg btn-xs" role="button">Add New Schedule</a>
 <div class="table-responsive">
   <table class="table table-striped">
     <thead>
@@ -5,12 +6,13 @@
         <th>#</th>
         <th>Team A</th>
         <th>Team B</th>
-        <th>Score Team A</th>
-        <th>Score Team B</th>
-        <th>Date Time Competition</th>
+        <th>Score A</th>
+        <th>Score B</th>
+        <th>Date</th>
         <th>Region</th>
         <th>Game Category</th>
         <th>Status</th>
+        <th>Action</th>
       </tr>
     </thead>
     <tbody>
@@ -25,6 +27,10 @@
           <td><?php echo $schedule->city ?></td>
           <td><?php echo $schedule->category ?></td>
           <td><?php echo ( '1' == $schedule->live ) ? 'Live' : 'Not Live' ?></td>
+          <td>
+            <a href="<?php echo $baseUrl ?>/admin/schedule/livescore/<?php echo $schedule->id ?>" target="_blank">Update Score</a> | 
+            <a href="<?php echo $baseUrl ?>/admin/schedule/edit/<?php echo $schedule->id ?>">Edit</a>
+          </td>
         </tr>
       <?php endforeach; ?>
     </tbody>

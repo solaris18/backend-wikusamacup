@@ -38,6 +38,10 @@ $app->post('/login','postLogin');
 $app->get('/logout','getLogout');
 $app->get('/dashboard','getDashboard');
 $app->get('/admin/schedule', 'getAdminSchedule');
+$app->get('/admin/schedule/add', 'getAdminScheduleCreate');
+$app->post('/admin/schedule', 'postAdminSchedule');
+$app->put('/admin/schedule/:id', 'putAdminSchedule');
+$app->get('/admin/schedule/livescore/:id', 'getAdminScheduleLive');
 
 // Post registration team
 function registration()
@@ -276,6 +280,85 @@ function getAdminSchedule()
   $data['scheduleActive'] = 'active';
 
   $app->render( 'schedule/view.php', $data );
+}
+
+function getAdminScheduleCreate()
+{
+  global $app;
+
+  if( empty($_SESSION['user']['email']) )
+    $app->redirect('/login');
+
+  $data['title'] = 'Add New Schedule';
+  $data['scheduleActive'] = 'active';
+  $data['teams'] = Registration::where( 'email', '!=' ,'' )->get();
+
+  $app->render( 'schedule/create.php', $data );
+}
+
+function postAdminSchedule()
+{
+  global $app;
+
+  if( empty($_SESSION['user']['email']) )
+    $app->redirect('/login');
+
+  try{
+    $data = $app->request->post();
+    $schedule = Schedule::create($data);
+
+    $app->flash('messages', '<p class="bg-success text-success">Schedule success create</p>');
+  } catch (Exception $e) {
+    $app->flash('messages', '<p class="bg-danger text-danger">Something problem, please try again</p>');
+  }
+
+
+  $app->redirect('/admin/schedule');
+}
+
+function putAdminSchedule( $id )
+{
+  global $app;
+
+  if( empty($_SESSION['user']['email']) )
+    $app->redirect('/login');
+
+  try{
+    $live = $app->request->post('live');
+
+    $schedule = Schedule::findOrFail($id);
+    $data = $app->request->post();
+    $schedule->update($data);
+
+    if( true == $live ){
+      $messages = 'Score success updated';
+      $redirect = '/admin/schedule/livescore/'.$id;
+    }else{
+      $messages = 'Schedule success updated';
+      $redirect = '/admin/schedule';
+    }
+
+    $app->flash('messages', '<p class="bg-success text-success">'.$messages.'</p>');
+  } catch (Exception $e) {
+    $app->flash('messages', '<p class="bg-danger text-danger">Something problem, please try again</p>');
+  }
+
+
+  $app->redirect( $redirect );
+}
+
+function getAdminScheduleLive( $id = 0 )
+{
+  global $app;
+
+  if( empty($_SESSION['user']['email']) )
+    $app->redirect('/login');
+
+  $data['schedule'] = Schedule::find($id);
+  $data['title'] = 'Update Live Score';
+  $data['scheduleActive'] = 'active';
+
+  $app->render( 'schedule/live.php', $data );
 }
 
 function getLogout()
