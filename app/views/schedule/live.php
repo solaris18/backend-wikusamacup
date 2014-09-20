@@ -1,5 +1,5 @@
 <form class="form-horizontal" role="form" action="<?php echo $baseUrl ?>/admin/schedule/<?php echo $schedule->id ?>" method="POST">
-  <input type="hidden" value="true" name="live">
+  <input type="hidden" value="true" name="islive">
   <input type="hidden" name="_METHOD" value="PUT"/>
   <div class="form-group">
     <label for="inputEmail3" class="col-sm-2 control-label"><?php echo $schedule->team1() ?></label>

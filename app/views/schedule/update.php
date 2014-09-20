@@ -1,5 +1,5 @@
 <form class="form-horizontal" role="form" action="<?php echo $baseUrl ?>/admin/schedule/<?php echo $schedule->id ?>" method="POST">
-  <input type="hidden" value="false" name="live">
+  <input type="hidden" value="false" name="islive">
   <input type="hidden" name="_METHOD" value="PUT"/>
   <div class="form-group">
     <label for="inputEmail3" class="col-sm-2 control-label">Team A</label>
@@ -43,8 +43,8 @@
     <label for="inputPassword3" class="col-sm-2 control-label">Regional</label>
     <div class="col-sm-10">
       <select class="form-control" name="city">
-        <option value"jakarta" <?php echo ( strtolower($schedule->city) == 'jakarta' ) ? 'selected' : '' ?> >Jakarta</option>
-        <option value"malang" <?php echo ( strtolower($schedule->city) == 'malang' ) ? 'selected' : '' ?>>Malang</option>
+        <option value="jakarta" <?php echo ( strtolower($schedule->city) == 'jakarta' ) ? 'selected' : '' ?> >Jakarta</option>
+        <option value="malang" <?php echo ( strtolower($schedule->city) == 'malang' ) ? 'selected' : '' ?>>Malang</option>
       </select>
     </div>
   </div>
@@ -52,9 +52,9 @@
     <label for="inputPassword3" class="col-sm-2 control-label">Game Category</label>
     <div class="col-sm-10">
       <select class="form-control" name="category">
-        <option value"futsal"  <?php echo ( strtolower($schedule->category) == 'futsal' ) ? 'selected' : '' ?>>Futsal</option>
-        <option value"basket" <?php echo ( strtolower($schedule->category) == 'basket' ) ? 'selected' : '' ?>>Basket</option>
-        <option value"badminton" <?php echo ( strtolower($schedule->category) == 'badminton' ) ? 'selected' : '' ?>>Badminton</option>
+        <option value="futsal"  <?php echo ( strtolower($schedule->category) == 'futsal' ) ? 'selected' : '' ?>>Futsal</option>
+        <option value="basket" <?php echo ( strtolower($schedule->category) == 'basket' ) ? 'selected' : '' ?>>Basket</option>
+        <option value="badminton" <?php echo ( strtolower($schedule->category) == 'badminton' ) ? 'selected' : '' ?>>Badminton</option>
       </select>
     </div>
   </div>
@@ -62,8 +62,8 @@
     <label for="inputPassword3" class="col-sm-2 control-label">It's Game Live Now?</label>
     <div class="col-sm-10">
       <select class="form-control" name="live">
-        <option value"1"  <?php echo ( $schedule->live == '1' ) ? 'selected' : '' ?>>Live</option>
-        <option value"0" <?php echo ( $schedule->live == '0' ) ? 'selected' : '' ?>>No Live</option>
+        <option value="1"  <?php echo ( $schedule->live == '1' ) ? 'selected' : '' ?>>Live</option>
+        <option value="0" <?php echo ( $schedule->live == '0' ) ? 'selected' : '' ?>>No Live</option>
       </select>
     </div>
   </div>
