@@ -2,13 +2,13 @@
   <input type="hidden" value="true" name="islive">
   <input type="hidden" name="_METHOD" value="PUT"/>
   <div class="form-group">
-    <label for="inputEmail3" class="col-sm-2 control-label"><?php echo $schedule->team1() ?></label>
+    <label for="inputEmail3" class="col-sm-2 control-label"><?php echo $schedule->team1_id ?></label>
     <div class="col-sm-10">
       <input type="number" name="score_team1" value="<?php echo $schedule->score_team1 ?>" >
     </div>
   </div>
   <div class="form-group">
-    <label for="inputEmail3" class="col-sm-2 control-label"><?php echo $schedule->team2() ?></label>
+    <label for="inputEmail3" class="col-sm-2 control-label"><?php echo $schedule->team2_id ?></label>
     <div class="col-sm-10">
       <input type="number" name="score_team2" value="<?php echo $schedule->score_team2 ?>" >
     </div>

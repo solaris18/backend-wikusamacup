@@ -19,8 +19,8 @@
       <?php foreach( $schedules as $num =>  $schedule ): ?>
         <tr>
           <td><?php echo ++$num ?></td>
-          <td><?php echo $schedule->team1() ?></td>
-          <td><?php echo $schedule->team2() ?></td>
+          <td><?php echo $schedule->team1_id ?></td>
+          <td><?php echo $schedule->team2_id ?></td>
           <td><?php echo $schedule->score_team1 ?></td>
           <td><?php echo $schedule->score_team2 ?></td>
           <td><?php echo date("d m y",strtotime($schedule->datetime_competition)).', '.date("H.i",strtotime($schedule->datetime_competition)) ?></td>
@@ -28,7 +28,7 @@
           <td><?php echo $schedule->category ?></td>
           <td><?php echo ( '1' == $schedule->live ) ? 'Live' : 'Not Live' ?></td>
           <td>
-            <a href="<?php echo $baseUrl ?>/admin/schedule/livescore/<?php echo $schedule->id ?>" target="_blank">Update Score</a> | 
+            <a href="<?php echo $baseUrl ?>/admin/schedule/livescore/<?php echo $schedule->id ?>" target="_blank">Update Score</a> |
             <a href="<?php echo $baseUrl ?>/admin/schedule/edit/<?php echo $schedule->id ?>">Edit</a>
           </td>
         </tr>

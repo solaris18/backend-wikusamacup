@@ -2,21 +2,13 @@
   <div class="form-group">
     <label for="inputEmail3" class="col-sm-2 control-label">Team A</label>
     <div class="col-sm-10">
-      <select class="form-control" name="team1_id">
-        <?php foreach( $teams as $team ): ?>
-          <option value="<?php echo $team->id ?>"><?php echo $team->team_name ?></option>
-        <?php endforeach; ?>
-      </select>
+      <input type="datetime" name="team1_id" >
     </div>
   </div>
   <div class="form-group">
     <label for="inputPassword3" class="col-sm-2 control-label">Team B</label>
     <div class="col-sm-10">
-      <select class="form-control" name="team2_id">
-        <?php foreach( $teams as $team ): ?>
-          <option value="<?php echo $team->id ?>"><?php echo $team->team_name ?></option>
-        <?php endforeach; ?>
-      </select>
+      <input type="datetime" name="team2_id" >
     </div>
   </div>
   <div class="form-group">

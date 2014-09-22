@@ -307,10 +307,20 @@ function postAdminSchedule()
     $app->redirect('/login');
 
   try{
-    $data = $app->request->post();
-    $schedule = Schedule::create($data);
 
-    $app->flash('messages', '<p class="bg-success text-success">Schedule success create</p>');
+    $validator = Validator::make($data = $app->request->post(), Schedule::$rules, Schedule::$messages);
+    if ($validator->fails() )
+    {
+      $error = '';
+      foreach ($validator->errors()->all() as $key => $value) {
+        $error .= '<p class="bg-danger text-danger">'.$value.'</p>';
+      }
+      $app->flash('messages', $error);
+    }else{
+      $schedule = Schedule::create($data);
+      $app->flash('messages', '<p class="bg-success text-success">Schedule success create</p>');
+    }
+
   } catch (Exception $e) {
     $app->flash('messages', '<p class="bg-danger text-danger">Something problem, please try again</p>');
   }
@@ -331,7 +341,7 @@ function putAdminSchedule( $id )
 
     $schedule = Schedule::findOrFail($id);
     $data = $app->request->post();
-    
+
     $schedule->update($data);
 
     if( 'true' == $live ){
