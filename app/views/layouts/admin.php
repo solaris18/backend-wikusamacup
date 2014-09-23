@@ -16,6 +16,7 @@
 
     <!-- Custom styles for this template -->
     <link href="<?php echo $baseUrl ?>/assets/css/dashboard.css" rel="stylesheet">
+    <link href="<?php echo $baseUrl ?>/assets/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -69,8 +70,17 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.3/moment.min.js"></script>
+    <script src="<?php echo $baseUrl ?>/assets/js/bootstrap-datetimepicker.js"></script>
     <script src="<?php echo $baseUrl ?>/assets/js/docs.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="<?php echo $baseUrl ?>/assets/js/ie10-viewport-bug-workaround.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            $('#datetimepicker').datetimepicker();
+        });
+    </script>
+
   </body>
 </html>

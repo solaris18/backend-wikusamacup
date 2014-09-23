@@ -14,7 +14,7 @@
   <div class="form-group">
     <label for="inputPassword3" class="col-sm-2 control-label">Date</label>
     <div class="col-sm-10">
-      <input type="datetime" name="datetime_competition" >
+      <input type="datetime" name="datetime_competition" id="datetimepicker" data-date-format="YYYY-MM-DD HH:mm">
     </div>
   </div>
   <div class="form-group">
@@ -29,7 +29,7 @@
   <div class="form-group">
     <label for="inputPassword3" class="col-sm-2 control-label">Game Category</label>
     <div class="col-sm-10">
-      <select class="form-control" name="city">
+      <select class="form-control" name="category">
         <option value"futsal">Futsal</option>
         <option value"basket">Basket</option>
         <option value"badminton">Badminton</option>
