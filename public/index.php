@@ -50,116 +50,127 @@ function registration()
     global $app;
     $response = $app->response();
     $response->header('Content-Type', 'application/json');
-        $response->header('Access-Control-Allow-Origin', '*');
+    $response->header('Access-Control-Allow-Origin', '*');
+    $responseData = '';
 
     try {
-      $data = $app->request->post();
-      $registration = Registration::create($data);
 
-      # Include the Autoloader (see "Libraries" for install instructions)
+      $validator = Validator::make($data = $app->request->post(), Registration::$rules, Registration::$messages);
+      if ( $validator->fails() )
+      {
+        $error = '';
+        foreach ($validator->errors()->all() as $key => $value) {
+          $error .= '<p class="bg-danger text-danger">'.$value.'</p>';
+        }
+        $responseData = json_encode( [ 'error' => true ] );
+      }else{
 
-      # Instantiate the client.
-      $mgClient = new Mailgun('key');
-      $domain = "domain";
+        $registration = Registration::create($data);
 
-      $toMalang = 'Yanuar Ardi S  <yanuardi04@gmail.com>';
-      $tojakarta = 'Dwi Ma\'ruf Alvansuri <dwimarufalvansuri@gmail.com>';
+        # Instantiate the client.
+        $mgClient = new Mailgun('key');
+        $domain = "domain";
 
-      $to = ( 'malang' == $app->request->post('region') ) ? $toMalang : $tojakarta;
+        $toMalang = 'Yanuar Ardi S  <yanuardi04@gmail.com>';
+        $tojakarta = 'Dwi Ma\'ruf Alvansuri <dwimarufalvansuri@gmail.com>';
 
-      # Make the call to the client.
-      $toAdmin = $mgClient->sendMessage("$domain",
-        array('from'    => $app->request->post('pic').' <'.$app->request->post('email').'>',
-              'to'      => $to,
-              'bcc'      => 'Agung Hari Wijaya <a9un9_ch@yahoo.co.id>',
-              'subject' => '[Wikusama Cup] New Team Register',
-              'html'    => '
-                <html>
-                  <body>
-                    <p>Hi , Dwi Ma\'ruf Alvansuri</p>
-                    <p>just notification '.$app->request->post('team_name').' team success register with this detail : </p>
-                    <p>
-                      <strong>Team Name </strong> : '.$app->request->post('team_name').'<br>
-                      <strong>Regional </strong> : '.$app->request->post('region').'<br>
-                      <strong>Generation </strong> : '.$app->request->post('generation').'<br>
-                      <strong>PIC Name </strong> : '.$app->request->post('pic').'<br>
-                      <strong>Phone Number </strong> : '.$app->request->post('phone').'<br>
-                      <strong>Email </strong> : '.$app->request->post('email').'<br>
-                      <strong>Sosial Media </strong> : '.$app->request->post('sosmed').'<br>
-                    </p>
-                  </body>
-                </html>
-              ')
-        );
+        $to = ( 'malang' == $app->request->post('region') ) ? $toMalang : $tojakarta;
 
-      $malang = '
-                    <p>
-                      <strong>Biaya</strong> : Rp 400.000 (empat ratus ribu rupiah)<br>
-                    </p>
-                    <p>Biaya pendaftaran dapat di transfer ke :</p>
-                    <p>
-                      <strong>BCA</strong> : 140 664 1571 a/n Rezha Rosella <br>
-                      <strong>BNI</strong> : 288 496 532 a/n Rezha Rosella <br>
-                      <strong>Mandiri</strong> : 141 001 038 1572 a/n Bakti Ariani Melinda
-                    </p>
-                    <br>
-                    <p>CP bisa menghubungi</p>
-                    <p>
-                      <strong>Yanuar Ardi S</strong> : +62 819 457 95 782 / yanuardi04@gmail.com <br>
-                      <strong>Wagis Pratama</strong> : +62 852 344 677 29 / wagispratama@gmail.com
-                    </p>
-                    <br>';
-      $jakarta = '
-                    <p>
-                      <strong>Biaya</strong> : Rp 700.000 (tujuh ratus ribu rupiah) - sudah meliputi 3 ajang lomba<br>
-                    </p>
-                    <p>Biaya pendaftaran dapat di transfer ke :</p>
-                    <p>
-                      <strong>BCA</strong> : 145 136 3404 a/n Dwi Ma\'ruf Alvansuri <br>
-                      <strong>Mandiri</strong> : 144 001 359 1224 a/n Dwi Ma\'ruf Alvansuri
-                    </p>
-                    <br>
-                    <p>Stelah melakukan pembayaran mohon konfirmasi pembayaran ke nomor +62857-55-33-89-88 (Dwi Ma\'ruf Alvansuri)</p>
-                    <br>';
+        # Make the call to the client.
+        $toAdmin = $mgClient->sendMessage("$domain",
+          array('from'    => $app->request->post('pic').' <'.$app->request->post('email').'>',
+                'to'      => $to,
+                'bcc'      => 'Agung Hari Wijaya <a9un9_ch@yahoo.co.id>',
+                'subject' => '[Wikusama Cup] New Team Register',
+                'html'    => '
+                  <html>
+                    <body>
+                      <p>Hi , Dwi Ma\'ruf Alvansuri</p>
+                      <p>just notification '.$app->request->post('team_name').' team success register with this detail : </p>
+                      <p>
+                        <strong>Team Name </strong> : '.$app->request->post('team_name').'<br>
+                        <strong>Regional </strong> : '.$app->request->post('region').'<br>
+                        <strong>Generation </strong> : '.$app->request->post('generation').'<br>
+                        <strong>PIC Name </strong> : '.$app->request->post('pic').'<br>
+                        <strong>Phone Number </strong> : '.$app->request->post('phone').'<br>
+                        <strong>Email </strong> : '.$app->request->post('email').'<br>
+                        <strong>Sosial Media </strong> : '.$app->request->post('sosmed').'<br>
+                      </p>
+                    </body>
+                  </html>
+                ')
+          );
 
-      $biaya = ( 'malang' == $app->request->post('region') ) ? $malang : $jakarta;
+        $malang = '
+                      <p>
+                        <strong>Biaya</strong> : Rp 400.000 (empat ratus ribu rupiah)<br>
+                      </p>
+                      <p>Biaya pendaftaran dapat di transfer ke :</p>
+                      <p>
+                        <strong>BCA</strong> : 140 664 1571 a/n Rezha Rosella <br>
+                        <strong>BNI</strong> : 288 496 532 a/n Rezha Rosella <br>
+                        <strong>Mandiri</strong> : 141 001 038 1572 a/n Bakti Ariani Melinda
+                      </p>
+                      <br>
+                      <p>CP bisa menghubungi</p>
+                      <p>
+                        <strong>Yanuar Ardi S</strong> : +62 819 457 95 782 / yanuardi04@gmail.com <br>
+                        <strong>Wagis Pratama</strong> : +62 852 344 677 29 / wagispratama@gmail.com
+                      </p>
+                      <br>';
+        $jakarta = '
+                      <p>
+                        <strong>Biaya</strong> : Rp 700.000 (tujuh ratus ribu rupiah) - sudah meliputi 3 ajang lomba<br>
+                      </p>
+                      <p>Biaya pendaftaran dapat di transfer ke :</p>
+                      <p>
+                        <strong>BCA</strong> : 145 136 3404 a/n Dwi Ma\'ruf Alvansuri <br>
+                        <strong>Mandiri</strong> : 144 001 359 1224 a/n Dwi Ma\'ruf Alvansuri
+                      </p>
+                      <br>
+                      <p>Stelah melakukan pembayaran mohon konfirmasi pembayaran ke nomor +62857-55-33-89-88 (Dwi Ma\'ruf Alvansuri)</p>
+                      <br>';
 
-      $toPic = $mgClient->sendMessage("$domain",
-        array('to'    => $app->request->post('pic').' <'.$app->request->post('email').'>',
-              'from'      => $to,
-              'bcc'      => 'Agung Hari Wijaya <a9un9_ch@yahoo.co.id>',
-              'subject' => '[Registrasi Wikusama Cup 2014] New Team Register Confirmation',
-              'html'    => '
-                <html>
-                  <body>
-                    <p>Halo , '.$app->request->post('pic').'</p>
-                    <p>Terimakasih atas keikutsertaan dalam Wikusamacup 2014</p>
-                    <p>Berikut data tim anda yang telah kami terima: </p>
-                    <p>
-                      <strong>Nama Tim </strong> : '.$app->request->post('team_name').'<br>
-                      <strong>Regional </strong> : '.$app->request->post('region').'<br>
-                      <strong>Angkatan </strong> : '.$app->request->post('generation').'<br>
-                      <strong>Nama CP </strong> : '.$app->request->post('pic').'<br>
-                      <strong>Nomor CP </strong> : '.$app->request->post('phone').'<br>
-                      <strong>Email CP </strong> : '.$app->request->post('email').'<br>
-                      <strong>Sosial Media </strong> : '.$app->request->post('sosmed').'<br>
-                    </p>
-                    <br>
-                    <p>Untuk pendaftaran harap transfer</p>'.$biaya.'
-                    <br>
-                    <br>
-                    <br>
-                    <strong>Panitia Wikusama Cup 2014</strong>
-                  </body>
-                </html>
-              ')
-        );
+        $biaya = ( 'malang' == $app->request->post('region') ) ? $malang : $jakarta;
 
+        $toPic = $mgClient->sendMessage("$domain",
+          array('to'    => $app->request->post('pic').' <'.$app->request->post('email').'>',
+                'from'      => $to,
+                'bcc'      => 'Agung Hari Wijaya <a9un9_ch@yahoo.co.id>',
+                'subject' => '[Registrasi Wikusama Cup 2014] New Team Register Confirmation',
+                'html'    => '
+                  <html>
+                    <body>
+                      <p>Halo , '.$app->request->post('pic').'</p>
+                      <p>Terimakasih atas keikutsertaan dalam Wikusamacup 2014</p>
+                      <p>Berikut data tim anda yang telah kami terima: </p>
+                      <p>
+                        <strong>Nama Tim </strong> : '.$app->request->post('team_name').'<br>
+                        <strong>Regional </strong> : '.$app->request->post('region').'<br>
+                        <strong>Angkatan </strong> : '.$app->request->post('generation').'<br>
+                        <strong>Nama CP </strong> : '.$app->request->post('pic').'<br>
+                        <strong>Nomor CP </strong> : '.$app->request->post('phone').'<br>
+                        <strong>Email CP </strong> : '.$app->request->post('email').'<br>
+                        <strong>Sosial Media </strong> : '.$app->request->post('sosmed').'<br>
+                      </p>
+                      <br>
+                      <p>Untuk pendaftaran harap transfer</p>'.$biaya.'
+                      <br>
+                      <br>
+                      <br>
+                      <strong>Panitia Wikusama Cup 2014</strong>
+                    </body>
+                  </html>
+                ')
+          );
 
-      $response->write( json_encode( [ 'id' => $registration->id, 'error' => false ] ) );
+        $responseData = json_encode( [ 'id' => $registration->id, 'error' => false ] ) ;
+      }
+
     } catch (Exception $e) {
-      $response->write( json_encode( [ 'error' => true ] ) );
+      $responseData =  json_encode( [ 'error' => true ] );
     }
+    $response->write( $responseData );
 }
 
 // Get Schedule

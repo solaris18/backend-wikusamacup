@@ -6,11 +6,11 @@ class Schedule extends Eloquent {
 
 	// Add your validation rules here
 	public static $rules = [
-		'team1_id' => 'required',
-		'team2_id' => 'required',
+		'team1_id' 	=> 'required',
+		'team2_id' 	=> 'required',
 		'datetime_competition' => 'required',
-		'city' => 'required',
-		'category' => 'required'
+		'city' 			=> 'required',
+		'category' 	=> 'required'
 	];
  	public static $messages = array(
       'required' => 'Your :attribute is required.',
