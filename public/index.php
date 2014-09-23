@@ -187,7 +187,7 @@ function getSchedule( $city = '', $category = '' )
 
       foreach ($schedule as $key => $value) {
         $return[$key]['id'] = $value->id;
-        $return[$key]['player'] = [ $value->team1(), $value->team2() ];
+        $return[$key]['player'] = [ $value->team1_id, $value->team2_id ];
         $return[$key]['time'] = [ date("d m y",strtotime($value->datetime_competition)), date("H.i",strtotime($value->datetime_competition)) ];
         $return[$key]['currentScore'] = [ $value->score_team1, $value->score_team2 ];
         $return[$key]['updated_at'] = $value->updated_at->toDateTimeString();
@@ -216,7 +216,7 @@ function getScheduleById( $id = null )
       $schedule = Schedule::find( $id );
 
       $return['id'] = $schedule->id;
-      $return['player'] = [ $schedule->team1(), $schedule->team2() ];
+      $return['player'] = [ $schedule->team1_id, $schedule->team1_id ];
       $return['time'] = [ date("d m y",strtotime($schedule->datetime_competition)), date("H.i",strtotime($schedule->datetime_competition)) ];
       $return['currentScore'] = [ $schedule->score_team1, $schedule->score_team2 ];
       $return['updated_at'] = $schedule->updated_at->toDateTimeString();
