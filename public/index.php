@@ -32,6 +32,7 @@ $app->post('/registration', 'registration');
 $app->get('/schedule','getSchedule');
 $app->get('/schedule/:id','getScheduleById');
 $app->get('/schedule/:city/:category','getSchedule');
+$app->get('/schedule/:city/:category/live','getScheduleLive');
 
 $app->get('/login','getLogin');
 $app->post('/login','postLogin');
@@ -193,6 +194,38 @@ function getSchedule( $city = '', $category = '' )
         $return[$key]['updated_at'] = $value->updated_at->toDateTimeString();
         $return[$key]['live'] = $value->live;
       }
+      $return['error'] = false;
+    } catch (Exception $e) {
+      $return['error'] = true;
+    }
+
+    $response->write( json_encode( $return ) );
+}
+
+// Get Schedule
+function getScheduleLive( $city = '', $category = '' )
+{
+    global $app;
+    $response = $app->response();
+    $response->header('Content-Type', 'application/json');
+    $response->header('Access-Control-Allow-Origin', '*');
+
+    $return = [];
+    try {
+
+      $schedule = Schedule::where( 'city', '=', $city)->where( 'category', '=', $category)->where( 'live', '=', 1 )->first();
+      $schedule = ( ! empty( $schedule ) ) ? $schedule : Schedule::where( 'city', '=', $city)->where( 'category', '=', $category)->where( 'datetime_competition', '>', date('Y-m-d H:i:s') )->orderBy( 'datetime_competition', 'asc' )->first();
+
+      if( ! empty( $schedule ) ) {
+        $return['id'] = $schedule->id;
+        $return['player'] = [ $schedule->team1_id, $schedule->team1_id ];
+        $return['time'] = [ date("d m y",strtotime($schedule->datetime_competition)), date("H.i",strtotime($schedule->datetime_competition)) ];
+        $return['currentScore'] = [ $schedule->score_team1, $schedule->score_team2 ];
+        $return['updated_at'] = $schedule->updated_at->toDateTimeString();
+        $return['live'] = $value->live;
+        $return['error'] = false;
+      }
+
       $return['error'] = false;
     } catch (Exception $e) {
       $return['error'] = true;
