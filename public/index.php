@@ -218,7 +218,7 @@ function getScheduleLive( $city = '', $category = '' )
 
       if( ! empty( $schedule ) ) {
         $return['id'] = $schedule->id;
-        $return['player'] = [ $schedule->team1_id, $schedule->team1_id ];
+        $return['player'] = [ $schedule->team1_id, $schedule->team2_id ];
         $return['time'] = [ date("d m y",strtotime($schedule->datetime_competition)), date("H.i",strtotime($schedule->datetime_competition)) ];
         $return['currentScore'] = [ $schedule->score_team1, $schedule->score_team2 ];
         $return['updated_at'] = $schedule->updated_at->toDateTimeString();
@@ -249,7 +249,7 @@ function getScheduleById( $id = null )
       $schedule = Schedule::find( $id );
 
       $return['id'] = $schedule->id;
-      $return['player'] = [ $schedule->team1_id, $schedule->team1_id ];
+      $return['player'] = [ $schedule->team1_id, $schedule->team2_id ];
       $return['time'] = [ date("d m y",strtotime($schedule->datetime_competition)), date("H.i",strtotime($schedule->datetime_competition)) ];
       $return['currentScore'] = [ $schedule->score_team1, $schedule->score_team2 ];
       $return['updated_at'] = $schedule->updated_at->toDateTimeString();
