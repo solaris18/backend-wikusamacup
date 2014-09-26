@@ -222,7 +222,7 @@ function getScheduleLive( $city = '', $category = '' )
         $return['time'] = [ date("d m y",strtotime($schedule->datetime_competition)), date("H.i",strtotime($schedule->datetime_competition)) ];
         $return['currentScore'] = [ $schedule->score_team1, $schedule->score_team2 ];
         $return['updated_at'] = $schedule->updated_at->toDateTimeString();
-        $return['live'] = $value->live;
+        $return['live'] = $schedule->live;
         $return['error'] = false;
       }
 
@@ -253,7 +253,7 @@ function getScheduleById( $id = null )
       $return['time'] = [ date("d m y",strtotime($schedule->datetime_competition)), date("H.i",strtotime($schedule->datetime_competition)) ];
       $return['currentScore'] = [ $schedule->score_team1, $schedule->score_team2 ];
       $return['updated_at'] = $schedule->updated_at->toDateTimeString();
-      $return['live'] = $value->live;
+      $return['live'] = $schedule->live;
       $return['error'] = false;
     } catch (Exception $e) {
       $return['error'] = true;
