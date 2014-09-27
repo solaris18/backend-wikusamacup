@@ -29,10 +29,19 @@
           <td><?php echo ( '1' == $schedule->live ) ? 'Live' : 'Not Live' ?></td>
           <td>
             <a href="<?php echo $baseUrl ?>/admin/schedule/livescore/<?php echo $schedule->id ?>" target="_blank">Update Score</a> |
-            <a href="<?php echo $baseUrl ?>/admin/schedule/edit/<?php echo $schedule->id ?>">Edit</a>
+            <a href="<?php echo $baseUrl ?>/admin/schedule/edit/<?php echo $schedule->id ?>">Edit</a> |
+            <form action="<?php echo $baseUrl ?>/admin/schedule/delete/<?php echo $schedule->id ?>" onSubmit="return confirmDelete();" method="POST">
+              <input type="hidden" name="_METHOD" value="DELETE"/>
+              <button type="submit"  class="btn default btn-xs blue">Delete</button>
+            </form>
           </td>
         </tr>
       <?php endforeach; ?>
     </tbody>
+    <script>
+      function confirmDelete(){
+          return confirm("Are you sure delete this data?");
+      }
+    </script>
   </table>
 </div>

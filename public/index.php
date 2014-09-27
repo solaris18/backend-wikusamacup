@@ -44,6 +44,7 @@ $app->post('/admin/schedule', 'postAdminSchedule');
 $app->put('/admin/schedule/:id', 'putAdminSchedule');
 $app->get('/admin/schedule/livescore/:id', 'getAdminScheduleLive');
 $app->get('/admin/schedule/edit/:id', 'getAdminScheduleEdit');
+$app->delete('/admin/schedule/delete/:id', 'deleteAdminSchedule');
 
 // Post registration team
 function registration()
@@ -432,6 +433,23 @@ function getAdminScheduleEdit( $id = 0 )
   $data['teams'] = Registration::where( 'email', '!=' ,'' )->get();
 
   $app->render( 'schedule/update.php', $data );
+}
+
+function deleteAdminSchedule( $id = 0 )
+{
+  global $app;
+
+  if( empty($_SESSION['user']['email']) )
+    $app->redirect('/login');
+
+  try{
+		Schedule::destroy($id);
+    $app->flash('messages', '<p class="bg-success text-success">Schedule successfull deleted.</p>');
+  } catch (Exception $e) {
+    $app->flash('messages', '<p class="bg-danger text-danger">Something problem, please try again</p>');
+  }
+
+  $app->redirect( '/admin/schedule' );
 }
 
 function getLogout()
