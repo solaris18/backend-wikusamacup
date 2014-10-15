@@ -3,7 +3,7 @@ require __DIR__.'/../vendor/autoload.php';
 
 use \Slim\Middleware\SessionCookie;
 use Mailgun\Mailgun;
-
+use Illuminate\Database\Capsule\Manager as Capsule;
 
 $app = new Slim\Slim( [
   'templates.path' => '../app/views/',
@@ -45,6 +45,10 @@ $app->put('/admin/schedule/:id', 'putAdminSchedule');
 $app->get('/admin/schedule/livescore/:id', 'getAdminScheduleLive');
 $app->get('/admin/schedule/edit/:id', 'getAdminScheduleEdit');
 $app->delete('/admin/schedule/delete/:id', 'deleteAdminSchedule');
+
+$app->get('/comment','getComment');
+$app->get( '/admin/comment/add', 'getAdminCommentCreate');
+$app->post( '/admin/comment', 'postAdminComment');
 
 // Post registration team
 function registration()
@@ -464,6 +468,79 @@ function getLogout()
   $app->flash('messages', '<p class="bg-success text-success">Anda telah keluar dari aplikasi</p>');
 
   $app->redirect('/login');
+}
+
+
+function getAdminCommentCreate()
+{
+  global $app;
+
+  if( empty($_SESSION['user']['email']) )
+    $app->redirect('/login');
+
+  $data['title'] = 'Add New Comment';
+
+  $app->render( 'comment/create.php', $data );
+}
+
+function postAdminComment()
+{
+  global $app;
+
+  if( empty($_SESSION['user']['email']) )
+    $app->redirect('/login');
+
+  try{
+
+    $validator = Validator::make($data = $app->request->post(), Comment::$rules, Comment::$messages);
+    if ($validator->fails() )
+    {
+      $error = '';
+      foreach ($validator->errors()->all() as $key => $value) {
+        $error .= '<p class="bg-danger text-danger">'.$value.'</p>';
+      }
+      $app->flash('messages', $error);
+    }else{
+      $schedule = Comment::create($data);
+      $app->flash('messages', '<p class="bg-success text-success">Comment success create</p>');
+    }
+
+  } catch (Exception $e) {
+    $app->flash('messages', '<p class="bg-danger text-danger">Something problem, please try again</p>');
+  }
+
+
+  $app->redirect('/admin/comment/add');
+}
+
+// Get Schedule
+function getComment()
+{
+    global $app;
+
+    $response = $app->response();
+    $response->header('Content-Type', 'application/json');
+    $response->header('Access-Control-Allow-Origin', '*');
+
+    // $return = [];
+    try {
+      $return['data'] = Comment::orderBy( Capsule::raw('RAND()') )->take(10)->get();
+
+      // foreach ($comment as $key => $value) {
+      //   $return[$key]['id'] = $value->id;
+      //   $return[$key]['name'] = $value->name;
+      //   $return[$key]['time'] = [ date("d m y",strtotime($value->datetime_competition)), date("H.i",strtotime($value->datetime_competition)) ];
+      //   $return[$key]['currentScore'] = [ $value->score_team1, $value->score_team2 ];
+      //   $return[$key]['updated_at'] = $value->updated_at->toDateTimeString();
+      //   $return[$key]['live'] = $value->live;
+      // }
+      $return['error'] = false;
+    } catch (Exception $e) {
+      print_r($e);
+      $return['error'] = true;
+    }
+
+    $response->write( json_encode( $return ) );
 }
 
 $app->run();
