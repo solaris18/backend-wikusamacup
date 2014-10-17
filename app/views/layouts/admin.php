@@ -52,6 +52,7 @@
           <ul class="nav nav-sidebar">
             <li class="<?php echo ( ! empty( $homeActive ) ? $homeActive : '' ) ?>"><a href="<?php echo $baseUrl ?>/dashboard">Team Registration</a></li>
             <li class="<?php echo ( ! empty( $scheduleActive ) ? $scheduleActive : '' ) ?>"><a href="<?php echo $baseUrl ?>/admin/schedule">Schedule & Scoring</a></li>
+            <li class="<?php echo ( ! empty( $commentActive ) ? $commentActive : '' ) ?>"><a href="<?php echo $baseUrl ?>/admin/comment/add">Comment</a></li>
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">

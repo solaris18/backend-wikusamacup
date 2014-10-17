@@ -12,7 +12,7 @@
     </div>
   </div>
   <div class="form-group">
-    <label for="inputPassword3" class="col-sm-2 control-label">Comment</label>
+    <label for="comment" class="col-sm-2 control-label">Comment</label>
     <div class="col-sm-10">
       <textarea class="form-control" name="comment" rows="3"></textarea>
     </div>

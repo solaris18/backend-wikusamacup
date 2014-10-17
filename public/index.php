@@ -524,16 +524,7 @@ function getComment()
 
     // $return = [];
     try {
-      $return['data'] = Comment::orderBy( Capsule::raw('RAND()') )->take(10)->get();
-
-      // foreach ($comment as $key => $value) {
-      //   $return[$key]['id'] = $value->id;
-      //   $return[$key]['name'] = $value->name;
-      //   $return[$key]['time'] = [ date("d m y",strtotime($value->datetime_competition)), date("H.i",strtotime($value->datetime_competition)) ];
-      //   $return[$key]['currentScore'] = [ $value->score_team1, $value->score_team2 ];
-      //   $return[$key]['updated_at'] = $value->updated_at->toDateTimeString();
-      //   $return[$key]['live'] = $value->live;
-      // }
+      $return['data'] = Comment::orderBy( Capsule::raw('RAND()') )->take(20)->get();
       $return['error'] = false;
     } catch (Exception $e) {
       print_r($e);
