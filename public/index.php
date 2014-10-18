@@ -47,8 +47,10 @@ $app->get('/admin/schedule/edit/:id', 'getAdminScheduleEdit');
 $app->delete('/admin/schedule/delete/:id', 'deleteAdminSchedule');
 
 $app->get('/comment','getComment');
+$app->get('/admin/comment','getAdminComment');
 $app->get( '/admin/comment/add', 'getAdminCommentCreate');
 $app->post( '/admin/comment', 'postAdminComment');
+$app->delete('/admin/comment/delete/:id', 'deleteAdminComment');
 
 // Post registration team
 function registration()
@@ -471,6 +473,21 @@ function getLogout()
 }
 
 
+
+function getAdminComment()
+{
+  global $app;
+
+  if( empty($_SESSION['user']['email']) )
+    $app->redirect('/login');
+
+  $data['data'] = Comment::all();
+  $data['title'] = 'Guest Book';
+  $data['commentActive'] = 'active';
+
+  $app->render( 'comment/view.php', $data );
+}
+
 function getAdminCommentCreate()
 {
   global $app;
@@ -479,6 +496,8 @@ function getAdminCommentCreate()
     $app->redirect('/login');
 
   $data['title'] = 'Add New Comment';
+  $data['commentActive'] = 'active';
+  $data[ 'layout' ] = 'layouts/comment.php';
 
   $app->render( 'comment/create.php', $data );
 }
@@ -502,7 +521,7 @@ function postAdminComment()
       $app->flash('messages', $error);
     }else{
       $schedule = Comment::create($data);
-      $app->flash('messages', '<p class="bg-success text-success">Comment success create</p>');
+      $app->flash('messages', '<p class="bg-success text-success text-left" style="padding: 5px 10px;border-radius: 3px;">Your comment success send ^_^</p>');
     }
 
   } catch (Exception $e) {
@@ -511,6 +530,23 @@ function postAdminComment()
 
 
   $app->redirect('/admin/comment/add');
+}
+
+function deleteAdminComment( $id = 0 )
+{
+  global $app;
+
+  if( empty($_SESSION['user']['email']) )
+    $app->redirect('/login');
+
+  try{
+    Comment::destroy($id);
+    $app->flash('messages', '<p class="bg-success text-success">Comment successfull deleted.</p>');
+  } catch (Exception $e) {
+    $app->flash('messages', '<p class="bg-danger text-danger">Something problem, please try again</p>');
+  }
+
+  $app->redirect( '/admin/comment' );
 }
 
 // Get Schedule

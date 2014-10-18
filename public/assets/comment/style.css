@@ -1,0 +1,695 @@
+html {
+	font-size: 100%;
+	-webkit-text-size-adjust: 100%;
+	-ms-text-size-adjust: 100%;
+}
+html, body {
+	width: 100%;
+	height: 100%;
+}
+* {
+	margin: 0;
+	padding: 0;
+}
+body {
+	font: 16px/24px "Bebas";
+	word-spacing: 5px;
+}
+h1, h2, h3, h4, h5, h6 {
+	font-family: "Bebas";
+	word-spacing: 5px;
+}
+p {
+	font-family: "Open Sans", "Helvetica", Arial;
+	color: #727272;
+	word-spacing: 0;
+}
+.clear {
+	clear: both;
+}
+.left-box {
+	padding-right: 0;
+}
+.right-box {
+	padding-left: 0;
+}
+.pad-tb80 {
+	padding-top: 80px;
+	padding-bottom: 80px;
+}
+.pad-tb50 {
+	padding-top: 50px;
+	padding-bottom: 50px;
+}
+.pad-tb40 {
+	padding-top: 40px;
+	padding-bottom: 40px;
+}
+.pad-tb70 {
+	padding-top: 70px;
+	padding-bottom: 70px;
+}
+.pad-tb29 {
+	padding-top: 29px;
+	padding-bottom: 29px;
+}
+.pad-lr20 {
+	padding-left: 20px !important;
+	padding-right: 20px  !important;
+}
+.pad-trbl0 {
+	padding-left: 0 !important;
+	padding-top: 0 !important;
+}
+.mar-bot50 {
+	margin-bottom: 50px;
+}
+.margin-none{
+	margin:0;
+}
+.text-large, .text-medium, .text-micro, .text-small, .text-xlarge, .text-xsmall, .text-xxlarge {
+	line-height: normal;
+}
+.title {
+	font-family: 'Catatan Perjalanan';
+	word-spacing: normal;
+}
+.title.blue {
+	color: #319adb
+}
+.text-micro {
+	font-size: 0.8rem;
+}
+.text-xsmall {
+	font-size: 1.3rem;
+}
+.text-small {
+	font-size: 1.5rem;
+}
+.text-medium {
+	font-size: 1.6rem;
+}
+.text-large {
+	font-size: 2.2rem;
+}
+.text-xlarge {
+	font-size: 3.0rem;
+}
+.text-xxlarge {
+	font-size: 4.5rem;
+}
+.text-white {
+	color: #fff;
+}
+/*--- custom style ---*/
+.wrapper {
+	width: 100%;
+	height: 100%;
+	position: relative;
+	margin: 0 auto;
+	z-index: 1;
+	overflow: visible;
+}
+.page {
+	height: 100%;
+	background: #fff;
+	position: relative;
+	overflow: hidden;
+}
+.bg-home {
+	background: #414d5b url(../img/bg-home.jpg) fixed top center no-repeat;
+	background-size: cover;
+}
+.bg-gallery{
+	background:#000 url(../img/bg-gallery.jpg)  top center repeat-y;
+	background-size: 100%;
+}
+.bg-yellow, .bg-green, .bg-blue, .bg-navy, .bg-trans-black {
+	color: #fff;
+}
+.bg-yellow {
+	background: #fcbd1d;
+}
+.bg-green {
+	background: #27ae60;
+}
+.bg-blue {
+	background: #319adb;
+}
+.bg-navy {
+	background: #272d35;
+}
+.bg-bluesky{
+	background: #CCFFFF;
+}
+.bg-biru{
+	position: relative;
+	z-index: -10;
+	background: #309bdb;
+}
+.bg-trans-black {
+	background-color: rgba(0,0,0,.1);
+	margin: 0 -15px;
+	font-family: "Catatan Perjalanan";
+	word-spacing: 0;
+	height: 50px;
+	padding: 16px 0px 0px 20px;
+}
+.bg-navy img {
+	width: 150px;
+}
+.logo {
+	display: block;
+	padding: 33px;
+	background: #fff;
+	text-align: center;
+}
+.logo img {
+	height: 180px;
+}
+ul.menu {
+	background: #319adb;
+	margin: 0px;
+}
+ul.menu li, ul.filter li {
+	background: #319adb;
+	padding: 13px;
+	color: #fff;
+	list-style: none;
+	text-decoration: none;
+	cursor:pointer;
+	-webkit-transition: .5s;
+	-moz-transition: .5s;
+	-ms-transition: .5s;
+	transition: .5s;
+}
+ul.menu li {
+	text-decoration: none;
+}
+ul.menu a {
+	color: #fff;
+	text-decoration: none;
+}
+ul.menu a li:hover {
+	background: #FBBC25;
+}
+
+/*Filter tab*/
+ul.filter.nav-tabs{
+	border-bottom: none;
+}
+
+ul.filter.nav-tabs li{
+	float: none;
+	margin: 0 2px;
+	display: inline-block;
+}
+ul.filter.nav-tabs li a,
+ul.filter.nav-tabs li a:hover{
+	color: #FFF;
+	border:none;
+	padding: 0px;
+	background: none;
+}
+
+.tab-content .schedule {
+	float: left;
+	width: 365px;
+	min-height: 435px;
+	padding-bottom: 15px;
+	display: inline-block;
+	margin: 0px 5px 15px;
+}
+
+#livescore span {
+	float: right;
+	color: #2c3e50;
+	margin-top: -17px;
+}
+select.pickcity {
+	float: left;
+	background: #27ae60;
+	color: #fff;
+	border: none;
+	height: inherit;
+	width: 133px;
+	padding-left: 19px;
+	-webkit-appearance: none;
+	-webkit-border-radius: 0px;
+}
+select.pickcity option {
+	padding: 10px;
+}
+.battle {
+	z-index: 2;
+	position: absolute;
+	text-align: center;
+	top: 194px;
+}
+.battle img {
+	height: 339px;
+}
+#about .col-md-12 .box-center {
+	padding: 14px 0px 24px;
+}
+#about .col-md-12 .box-center.bg-yellow {
+	padding-left: 33px;
+}
+#about .col-md-12 .box-center.bg-blue {
+	padding-right: 33px;
+}
+#about .col-md-12 .box-center h1 {
+	margin: 2px 0px 14px;
+}
+#sponsor {
+	padding-bottom: 50px;
+}
+#sponsor div h1 {
+	margin-top: 2px;
+	margin-bottom: 30px;
+}
+#register {
+	padding-top: 20px;
+}
+#gallery {
+	padding-top: 32px;
+	padding-bottom: 30px;
+}
+.simform {
+	padding-bottom: 11px !important;
+}
+section {
+	color: rgba(0,0,0,0.45);
+	font-size: 80%;
+	line-height: 1.25;
+	font-family: 'Lato', Arial, sans-serif;
+}
+.pad-tb29.pad-lr20 .text-xxlarge {
+	padding: 8px 0px 18px;
+}
+@-moz-document url-prefix() {
+	.battle {
+	    top: 208px;
+	}
+	.battle img {
+	    height: 347px;
+	}
+    .pad-tb29.pad-lr20 .title {
+		height: 22px;
+	}
+	.pad-tb80.pad-lr20 .title.text-small {
+		height: 23px;
+	}
+	.pad-tb29.pad-lr20 .text-xxlarge {
+		padding: 13px 0px 13px;
+	}
+	.col-md-12.col-sm-12.col-xs-6.bg-navy .pad-tb80.pad-lr20 {
+		padding-bottom: 79px;
+	}
+	.bg-trans-black {
+		padding: 14px 0px 0px 20px;
+	}
+	.pickcity {
+	    padding-top: 2px;
+	}
+	.logo {
+		padding: 34px;
+	}
+	.bg-navy .container .col-md-12 .title.text-xlarge {
+		height: 42px;
+	}
+}
+.progress {
+	margin-bottom: 0
+}
+.btn-sponsor {
+	width: 100%;
+	background: #319adb;
+	padding: 10px;
+	color: #fff;
+	border: none;
+	border-bottom: 5px #2a8ac5 solid;
+	-webkit-transition: .5s;
+	-moz-transition: .5s;
+	-ms-transition: .5s;
+	transition: .5s;
+	font-family: "Open sans";
+	text-transform: uppercase;
+}
+.btn-sponsor:hover {
+	background: #fcbd1d;
+	border-bottom: solid 5px #e6ac17;
+}
+ul.filter{margin:30px 0; text-align:center}
+ul.filter li{
+	display:inline;
+}
+ul.filter li:hover, ul.filter li.active{
+	background:#fcbd1d;
+}
+footer{
+	background:#2c3e50 url(../img/top-border.png) top left repeat-x;
+}
+footer .col-md-3 p {
+	margin-bottom: 0px;
+}
+
+.btn-menu-box{
+	position:fixed;
+	width:50px;
+	top:0;
+	right:0;
+	background:#272D35;
+	padding:15px;
+	z-index: 1;
+}
+.btn-menu-box span{
+	font-size: 22px;
+	color: #FFF;
+}
+
+.category{
+	float: right;
+	height: inherit;
+	width: 133px;
+	padding:9px 0 0 19px;
+}
+.category input{
+	border:none;
+	border-radius:15px;
+	display: inline-block;
+	width: 32px;
+	height: 32px;
+	border: 2px solid #FFF;
+	outline:none !important;
+}
+.category input.active{
+	border: 2px solid #27ae60;
+}
+.category .futsal{
+	background: url('../img/ico-foot.jpg') -1px 0px no-repeat;
+}
+.category .basket{
+	background: url('../img/ico-basket.jpg') -1px -1px no-repeat;
+}
+.category .batminton{
+	background: url('../img/ico-batminton.jpg') no-repeat;
+}
+
+.box-mediapartner{
+	background-color: #ededed;padding-top:0;padding-bottom:50px;
+}
+.box-mediapartner h3{
+	font-family: 'Open Sans', Helvetica, Arial;font-style:italic;text-align: left;font-size: 18px;font-weight: bold;
+}
+/** jQuery liveScore hack */
+.ls-container .ls-content .ls-row .ls-row-date {
+	top: -2px !important;
+}
+
+.ls-container .ls-content .ls-row .ls-row-queue {
+	padding: 2px !important;
+}
+.carousel-control{
+	color: #09F;
+	left: -45px;
+	font-size: 30px;
+	background: none !important;
+}
+.carousel-control:hover{
+	color: #09F;
+}
+.carousel-control.right{
+	right: -45px;
+}
+.carousel-control .fa{
+	top: 50%;
+	position: absolute;
+	display: inline-block;
+}
+.carousel-control .fa:hover{
+	color: #428bca;
+}
+/* ============================================================================================================================
+== OVAL SPEECH BUBBLE WITH QUOTATION MARKS (more CSS3)
+** ============================================================================================================================ */
+.buble{
+	height: 630px;
+	z-index :0;
+	background: url( '../img/bubble.jpg' ) no-repeat right bottom;
+}
+.oval-quotes {
+	border:none;
+  position:relative;
+  width:400px;
+  height:300px;
+  margin:60px auto 10px;
+  color:#000;
+  background:#FFF;
+  /* css3 */
+  /*
+  NOTES:
+  -webkit-border-radius:Apx Bpx; // produces oval in safari 4 and chrome 4
+  -webkit-border-radius:Apx / Bpx; // produces oval in chrome 4 (again!) but not supported in safari 4
+  Not correct application of the current spec, therefore, using longhand to avoid future problems with webkit corrects this
+  */
+  -webkit-border-top-left-radius:400px 300px;
+  -webkit-border-top-right-radius:400px 300px;
+  -webkit-border-bottom-right-radius:400px 300px;
+  -webkit-border-bottom-left-radius:400px 300px;
+  -moz-border-radius:400px / 300px;
+  border-radius:400px / 300px;
+}
+
+/* creates opening quotation mark */
+.oval-quotes:before {
+  content:"\201C";
+  position:absolute;
+  z-index:1;
+  top:20px;
+  left:20px;
+  font:100px/1 Georgia, serif;
+	font-weight:bolder;
+  color:#bcbfbf;
+}
+
+.oval-quotes .wrap {
+	width:325px;
+	height:250px;
+	padding:65px 0 0;
+	margin:0 auto;
+}
+.oval-quotes .wrap p{
+	text-align: center;
+	font-size: 22px;
+	color: #333333;
+}
+.oval-quotes .wrap .author {
+	font-weight:bold;
+	font-size:22px;
+	color:#333333;
+}
+
+.oval-quotes .wrap .grade {
+	font-weight: bold;
+	font-size: 14px;
+	color: #3ad89b;
+}
+
+/* creates smaller curve */
+.oval-quotes .wrap:before {
+  content:"";
+  position:absolute;
+  z-index:-1;
+  bottom:-93px;
+  right:8%;
+  width:340px; /* wider than necessary to make it look a bit better in IE8 */
+  height:171px;
+  background:#309bdb; /* need this for webkit - bug in handling of border-radius */
+  /* css3 */
+  -webkit-border-bottom-right-radius:130px 168px;
+  -moz-border-radius-bottomright:130px 168px;
+  border-bottom-right-radius:130px 168px;
+  /* using translate to avoid undesired appearance in CSS2.1-capabable but CSS3-incapable browsers */
+  -webkit-transform:translate(-30px, -2px) rotate(-5deg );
+  -moz-transform:translate(-30px, -2px) rotate(-5deg );
+  -ms-transform:translate(-30px, -2px) rotate(-5deg );
+  -o-transform:translate(-30px, -2px) rotate(-5deg );
+  transform:translate(-30px, -2px) rotate(-5deg );
+}
+
+/* creates larger curve */
+.oval-quotes .wrap:after {
+  content:"";
+  position:absolute;
+  z-index:-2;
+  bottom:-39px;
+  right:-8%;
+  height:155px;
+  /* border-right:200px solid #FFF; */
+  background:#FFF; /* need this for webkit - bug in handling of border-radius */
+  /* css3 */
+  -webkit-border-bottom-right-radius:429px 395px;
+  -moz-border-radius-bottomright:429px 395px;
+  border-bottom-right-radius:429px 395px;
+  /* using translate to avoid undesired appearance in CSS2.1-capabable but CSS3-incapable browsers */
+  -webkit-transform:translate(0, -2px) rotate( -19deg );
+  -moz-transform:translate(0, -2px) rotate( -19deg );
+  -ms-transform:translate(0, -2px) rotate( -19deg );
+  -o-transform:translate(0, -2px) rotate( -19deg );
+  transform:translate(0, -2px) rotate( -19deg );
+  /* reduce the damage in FF3.0 */
+  display:block;
+  width:400px;
+}
+
+.oval-quotes + .wrap {
+  position:relative; /* part of the IE8 width compromise */
+  width:150px;
+  margin:0 0 2em;
+  font-size:18px;
+  font-weight:bold;
+}
+
+
+/* ------------- RESPONSIVE  ----------- */
+@media (max-width: 767px) {
+.container {
+	width: 100%;
+	padding-left: 0;
+	padding-right: 0;
+}
+.left-box, .right-box {
+	padding: 0
+}
+html {
+	font-size: 80%
+}
+.bg-home {
+	background: none;
+	height: auto !important;
+}
+#home {
+	padding: 0 !important;
+	height: auto !important;
+}
+#about .col-md-push-1.col-md-10.mar-bot50 {
+	margin-bottom: 0px;
+}
+.battle {
+	position: relative;
+	top: 0;
+	margin-bottom: 13px;
+}
+.battle img {
+	width: 381px;
+	height: auto;
+}
+#about .col-md-12 .box-center.bg-yellow {
+	padding-left: 0px;
+}
+#about .col-md-12 .box-center.bg-blue {
+	padding-right: 0px;
+}
+.box-center {
+	text-align: center;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+section {
+	font-size: 100%;
+}
+.pad-tb29.pad-lr20 {
+	padding-top: 37px;
+	padding-bottom: 38px;
+}
+.bg-trans-black {
+	padding: 19px 0px 0px 20px;
+}
+.bg-trans-black.visible-xs {
+	padding: 14px 0px 0px 20px;
+}
+.simform {
+	padding-top: 0px !important;
+}
+@-moz-document url-prefix() {
+	.col-md-12.col-sm-12.col-xs-6.bg-navy .pad-tb80.pad-lr20 {
+		padding-bottom: 83px;
+	}
+	.bg-trans-black {
+		padding: 17px 0px 0px 20px;
+	}
+}
+}
+@media (min-width: 768px) and (max-width: 991px) {
+.container {
+	width: 100%;
+	padding-left: 0;
+	padding-right: 0;
+}
+.bg-home {
+	background: none;
+	height: auto !important;
+}
+.left-box, .right-box {
+	padding: 0
+}
+#home {
+	padding: 0 !important;
+	height: auto !important;
+}
+#about .col-md-push-1.col-md-10.mar-bot50 {
+	margin-bottom: 0px;
+}
+.battle {
+	top: 85px;
+}
+.battle img {
+	height: 220px;
+}
+@-moz-document url-prefix() {
+	.battle {
+	    top: 90px;
+	}
+}
+#about .col-md-12 .box-center h1 {
+	font-size: 3.3rem;
+	margin: 0px 0px 14px;
+}
+#about .col-md-12 .box-center {
+	padding: 14px 0px 13px;
+}
+.simform {
+	padding-top: 0px !important;
+}
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+.battle {
+	top: 218px;
+}
+.battle img {
+	height: 302px;
+}
+.bg-navy img {
+	width: 100%;
+}
+@-moz-document url-prefix() {
+	.battle {
+	    top: 239px;
+	}
+}
+#about .col-md-12 .box-center h1 {
+	font-size: 3.3rem;
+	margin: 0px 0px 14px;
+}
+#about .col-md-12 .box-center.bg-yellow {
+	padding-left: 30px;
+}
+#about .col-md-12 .box-center.bg-blue {
+	padding-right: 30px;
+}
+#about .col-md-12 .box-center {
+	padding: 14px 0px 14px;
+}
+@media (min-width: 1200px) {
+}

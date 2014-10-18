@@ -1,25 +1,19 @@
-<form class="form-horizontal" role="form" action="<?php echo $baseUrl ?>/admin/comment" method="POST">
+<form role="form"action="<?php echo $baseUrl ?>/admin/comment" method="POST">
   <div class="form-group">
-    <label for="name" class="col-sm-2 control-label">Name</label>
-    <div class="col-sm-10">
-      <input type="text" name="name" >
-    </div>
+    <label for="name" style="float:left; color:#FFF;">Name</label>
+      <input class="form-control" type="text" name="name" style="font-family: arial;">
   </div>
   <div class="form-group">
-    <label for="generation" class="col-sm-2 control-label">Generation</label>
-    <div class="col-sm-10">
-      <input type="text" name="generation" >
-    </div>
+    <label for="generation" style="float:left; color:#FFF;">Generation</label>
+      <input class="form-control" type="text" name="generation"  style="font-family: arial;">
   </div>
   <div class="form-group">
-    <label for="comment" class="col-sm-2 control-label">Comment</label>
-    <div class="col-sm-10">
-      <textarea class="form-control" name="comment" rows="3"></textarea>
-    </div>
+    <label for="exampleInputFile" style="float:left; color:#FFF;">Cuap Cuap</label>
+    <textarea class="form-control" name="comment" rows="5" style="font-family: arial;"></textarea>
   </div>
-  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" class="btn btn-default">Save</button>
+  <div class="col-md-4 pull-right">
+    <div class="row">
+      <button type="submit" class="btn-sponsor text-small col-md-4 ">Send</button>
     </div>
   </div>
 </form>
