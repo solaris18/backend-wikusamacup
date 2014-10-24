@@ -10,6 +10,8 @@ class CommentMigration {
             $table->increments('id');
             $table->string('name');
             $table->string('generation');
+            $table->string('email');
+            $table->boolean('join');
             $table->text('comment');
             $table->timestamps();
         });

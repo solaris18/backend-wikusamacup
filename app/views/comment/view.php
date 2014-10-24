@@ -6,6 +6,7 @@
         <th>#</th>
         <th>Name</th>
         <th>Generation</th>
+        <th>Milis</th>
         <th>Action</th>
       </tr>
     </thead>
@@ -15,6 +16,7 @@
           <td><?php echo ++$num ?></td>
           <td><?php echo $comment->name ?></td>
           <td><?php echo $comment->generation ?></td>
+          <td><?php echo ( $comment->join ) ? 'Minat join milis' : 'Tidak minat/sudah join milis' ?></td>
           <td>
             <form action="<?php echo $baseUrl ?>/admin/comment/delete/<?php echo $comment->id ?>" onSubmit="return confirmDelete();" method="POST">
               <input type="hidden" name="_METHOD" value="DELETE"/>

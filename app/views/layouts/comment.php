@@ -27,15 +27,10 @@
 
   <body style="padding:0;">
     <div class="wrapper"style="background: #414d5b url('http://wikusamacup.com/assets/img/bg-home.jpg') fixed top center no-repeat;background-size: cover;">
-      <div class="container pad-tb40" id="about">
-				<div class="col-md-push-1 col-md-10 mar-bot50" align="center">
+      <div class="container pad-tb40" id="about" style="padding-top:10px;padding-bottom:0;">
+			<div class="col-md-push-1 col-md-10 mar-bot50" align="center" style="margin-bottom:0;">
 					<h1 class="title blue text-xlarge">"One Believe To Win The dreams"</h1>
-					<p style="color:#FFF">
-						Wikusama Cup merupakan suatu kompetisi olahraga yang rutin diselenggarakan tiap tahun oleh para anggota IAW (Ikatan Alumni Wikusama). IAW ini merupakan ikatan alumni SMK telkom Malang (Telkom School) yang dibentuk pada tahun 2003. Saat ini IAW telah beranggotakan lebih dari 3000 alumni yang tersebar hampir di seluruh Indonesia.
-					</p>
           <div class="form">
-            <br>
-
                       <?php echo $flash['messages'] ?>
 
                       <?php echo $yield ?>
@@ -56,9 +51,14 @@
     <script src="<?php echo $baseUrl ?>/assets/js/ie10-viewport-bug-workaround.js"></script>
 
     <script type="text/javascript">
-        $(function () {
-            $('#datetimepicker').datetimepicker();
+      $(function () {
+        $('input[ name = milis ]').on( 'change', function(){
+          if( 0 == $(this).val() )
+            $( '#milis' ).slideDown();
+          else
+            $( '#milis' ).slideUp();
         });
+      });
     </script>
 
   </body>

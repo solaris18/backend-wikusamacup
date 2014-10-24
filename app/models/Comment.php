@@ -8,12 +8,14 @@ class Comment extends Eloquent {
   public static $rules = [
     'name' 	=> 'required',
     'generation' 	=> 'required',
-    'comment' => 'required'
+    'comment' => 'required',
+    'email' => 'required|email'
   ];
   public static $messages = array(
-    'required' => 'Your :attribute is required.'
+    'required' => 'Your :attribute is required.',
+    'email'    => 'Your :attribute must be a valid email address'
   );
 
   // Don't forget to fill this array
-  protected $fillable = [ 'name', 'generation', 'comment' ];
+  protected $fillable = [ 'name', 'generation', 'comment', 'email', 'join' ];
 }
