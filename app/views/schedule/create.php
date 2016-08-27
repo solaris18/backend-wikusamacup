@@ -33,6 +33,7 @@
         <option value"futsal">Futsal</option>
         <option value"basket">Basket</option>
         <option value"badminton">Badminton</option>
+        <option value"voly">Voly</option>
       </select>
     </div>
   </div>
