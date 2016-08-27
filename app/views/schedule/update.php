@@ -47,6 +47,7 @@
         <option value="futsal"  <?php echo ( strtolower($schedule->category) == 'futsal' ) ? 'selected' : '' ?>>Futsal</option>
         <option value="basket" <?php echo ( strtolower($schedule->category) == 'basket' ) ? 'selected' : '' ?>>Basket</option>
         <option value="badminton" <?php echo ( strtolower($schedule->category) == 'badminton' ) ? 'selected' : '' ?>>Badminton</option>
+        <option value="voly" <?php echo ( strtolower($schedule->category) == 'voly' ) ? 'selected' : '' ?>>Voly</option>
       </select>
     </div>
   </div>
