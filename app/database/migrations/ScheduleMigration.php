@@ -11,11 +11,11 @@ class ScheduleMigration {
             $table->string('team1_id');
             $table->string('team2_id');
             $table->datetime('datetime_competition');
-            $table->integer('score_team1');
-            $table->integer('score_team2');
+            $table->integer('score_team1')->nullable();
+            $table->integer('score_team2')->nullable();
             $table->string('city');
             $table->string('category');
-            $table->boolean('live');
+            $table->boolean('live')->nullable();
             $table->timestamps();
         });
     }
