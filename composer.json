@@ -1,9 +1,9 @@
 {
 	"require": {
 		"slim/slim": "2.*",
-		"illuminate/database": "*",
-		"illuminate/validation": "*",
-		"illuminate/translation": "*",
+		"illuminate/database": "5.3.4",
+		"illuminate/validation": "5.3.4",
+		"illuminate/translation": "5.3.4",
 		"mailgun/mailgun-php": "1.7.1",
     "petebrowne/slim-layout-view": "0.3.*"
 	},
